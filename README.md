@@ -7,8 +7,10 @@ Docs:
 - Forum: https://www.tagtagtag.fr/forum/
 
 ### Service restart + logs check
+```
 sudo systemctl restart nab2mqttd.service
 sudo journalctl -u nab2mqttd.service -n 10 -f
+```
 
 ### deployment
 PAHO MQTT is required, run as root:
