@@ -1,4 +1,3 @@
-source /opt/pynab/venv/bin/activate
 pip install paho-mqtt==1.6.1
 python manage.py makemigrations
 python manage.py migrate

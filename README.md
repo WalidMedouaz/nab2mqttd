@@ -25,6 +25,7 @@ For now if you plan to use TLS the public key must be copied to the server in:
 ### installation
 ```
 cd /opt/pynab
+source /opt/pynab/venv/bin/activate
 git clone https://github.com/WalidMedouaz/nab2mqttd.git
 sh nab2mqttd/installation.sh
 ```
