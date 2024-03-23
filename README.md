@@ -25,15 +25,8 @@ For now if you plan to use TLS the public key must be copied to the server in:
 ### installation
 ```
 cd /opt/pynab
-source /opt/pynab/venv/bin/activate
-pip install paho-mqtt
 git clone https://github.com/WalidMedouaz/nab2mqttd.git
-python manage.py makemigrations
-python manage.py migrate
-sudo cp nab2mqttd.service /lib/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable nab2mqttd
-sudo service nab2mqttd start
+sh nab2mqttd/installation.sh
 ```
 
 ### (development) service restart + logs check
