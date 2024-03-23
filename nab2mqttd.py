@@ -10,7 +10,7 @@ import paho.mqtt.client as mqtt
 class Nab2MQTTd(NabInfoService):
 
     # on_connect callback
-    def on_connect(self, client, userdata, flags, rc):
+    def on_connect(self, client, userdata, flags, rc, properties):
         from . import models
         logging.debug("Connected to MQTT with result code " + str(rc))
         # Subscribing in on_connect() means that if we lose the connection and
@@ -29,11 +29,15 @@ class Nab2MQTTd(NabInfoService):
     # {"type":"message", "body":[{"audio":["nabsurprised/2.mp3"]}], "expiration":"TAGEXPIRATION"}
     def on_message(self, client, userdata, msg):
           logging.debug(msg.payload)
+          #logging.debug(msg.payload)nab2mqttd.nab2mqttd
           packet = str(msg.payload.decode("utf-8","ignore"))
           #state = json.loads(packet)
           #logging.debug(state)
+          print(str(msg.payload.decode("utf-8","ignore")))
+          packet_nab2 = '{"type":"message", "body":[{"audio":["nabmastodond/communion.wav"]}]}'
+          self.client.publish("nabaztag/nab2", packet_nab2, 0, False)
 
-          # playing animation via the self.perform method; allows to have the animation properly handled by the NabService
+         # playing animation via the self.perform method; allows to have the animation properly handled by the NabService
           if '"type":"info"' in packet:
             #logging.debug("info is in da place")
             state = json.loads(packet)
@@ -56,7 +60,7 @@ class Nab2MQTTd(NabInfoService):
           packet = packet + "\r\n"
           self.writer.write(packet.encode("utf8"))
           async_to_sync(self.writer.drain)()
-            
+
     def __init__(self):
         super().__init__()
         from . import models
@@ -73,7 +77,7 @@ class Nab2MQTTd(NabInfoService):
 
         self.infopacket = None
 
-        self.client = mqtt.Client(client_id = config.clientid)
+        self.client = mqtt.Client(client_id = config.clientid, callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
         if config.username:
