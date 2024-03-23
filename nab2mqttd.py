@@ -34,8 +34,9 @@ class Nab2MQTTd(NabInfoService):
           #state = json.loads(packet)
           #logging.debug(state)
           print(str(msg.payload.decode("utf-8","ignore")))
-          packet_nab2 = '{"type":"message", "body":[{"audio":["nabmastodond/communion.wav"]}]}'
-          self.client.publish("nabaztag/nab2", packet_nab2, 0, False)
+          
+          #packet_nab2 = '{"type":"message", "body":[{"audio":["nabmastodond/communion.wav"]}]}'
+          #self.client.publish("nabaztag/nab2", packet_nab2, 0, False)
 
          # playing animation via the self.perform method; allows to have the animation properly handled by the NabService
           if '"type":"info"' in packet:

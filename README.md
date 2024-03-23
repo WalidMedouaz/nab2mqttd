@@ -10,7 +10,7 @@ Docs:
 PAHO MQTT is required, run as root:
 ```
 # Last compatible version
-pip install paho-mqtt==1.6.1
+pip install paho-mqtt==2.0.0
 ```
 
 Add nab2mqttd in the INSTALLED_APPS section of nabweb/settings.py
