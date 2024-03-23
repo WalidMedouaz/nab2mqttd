@@ -6,16 +6,10 @@ Docs:
 - How to implement a Nabaztag service: https://github.com/nabaztag2018/pynab/wiki/How-to-create-a-new-service
 - Forum: https://www.tagtagtag.fr/forum/
 
-### Service restart + logs check
-```
-sudo systemctl restart nab2mqttd.service
-sudo journalctl -u nab2mqttd.service -n 10 -f
-```
-
 ### deployment
 PAHO MQTT is required, run as root:
 ```
-# Dernière version compatible
+# Last compatible version
 pip install paho-mqtt==1.6.1
 ```
 
@@ -33,13 +27,19 @@ For now if you plan to use TLS the public key must be copied to the server in:
 cd /opt/pynab
 source /opt/pynab/venv/bin/activate
 pip install paho-mqtt
-git clone https://github.com/nopap/nab2mqttd.git
+git clone https://github.com/WalidMedouaz/nab2mqttd.git
 python manage.py makemigrations
 python manage.py migrate
 sudo cp nab2mqttd.service /lib/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable nab2mqttd
 sudo service nab2mqttd start
+```
+
+### (development) service restart + logs check
+```
+sudo systemctl restart nab2mqttd.service
+sudo journalctl -u nab2mqttd.service -n 10 -f
 ```
 
 ### Usage
