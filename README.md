@@ -6,10 +6,15 @@ Docs:
 - How to implement a Nabaztag service: https://github.com/nabaztag2018/pynab/wiki/How-to-create-a-new-service
 - Forum: https://www.tagtagtag.fr/forum/
 
+### Service restart + logs check
+sudo systemctl restart nab2mqttd.service
+sudo journalctl -u nab2mqttd.service -n 10 -f
+
 ### deployment
 PAHO MQTT is required, run as root:
 ```
-pip install paho-mqtt
+# Dernière version compatible
+pip install paho-mqtt==1.6.1
 ```
 
 Add nab2mqttd in the INSTALLED_APPS section of nabweb/settings.py
